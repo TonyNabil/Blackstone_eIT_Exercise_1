@@ -1,0 +1,251 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "TASKS",
+        "description": "TASKS APIs"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Task",
+            "description": "API for Tasks in the system"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/task": {
+            "post": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "create Task",
+                "description": "create new task",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "create task object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/createTask"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid operation"
+                    },
+                    "500": {
+                        "description": "server error"
+                    }
+                },
+                "x-swagger-router-controller": "taskController"
+            },
+            "get": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "get all tasks",
+                "description": "get all tasks",
+                "operationId": "list",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid operation"
+                    },
+                    "500": {
+                        "description": "server error"
+                    }
+                },
+                "x-swagger-router-controller": "taskController"
+            }
+        },
+        "/task/{id}": {
+            "get": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "get Task details",
+                "description": "get task details",
+                "operationId": "details",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid operation"
+                    },
+                    "500": {
+                        "description": "server error"
+                    }
+                },
+                "x-swagger-router-controller": "taskController"
+            },
+            "put": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "update task",
+                "description": "update task",
+                "operationId": "update",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "update task",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/updateTask"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid operation"
+                    },
+                    "500": {
+                        "description": "server error"
+                    }
+                },
+                "x-swagger-router-controller": "taskController"
+            },
+            "delete": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "delete Task",
+                "description": "delete task",
+                "operationId": "delete",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid operation"
+                    },
+                    "500": {
+                        "description": "server error"
+                    }
+                },
+                "x-swagger-router-controller": "taskController"
+            }
+        }
+
+    },
+    "definitions": {
+        "createTask": {
+            "required": [
+                "title",
+                "description",
+                "priority"
+            ],
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "priority": {
+                    "type": "string",
+                    "enum": [
+                        "HIGH",
+                        "MEDIUM",
+                        "LOW"
+                    ]
+                }
+            },
+            "example": {
+                "title": "Task 1",
+                "description": "Task 1 description",
+                "priority": "HIGH"
+            }
+        },
+        "updateTask": {
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "priority": {
+                    "type": "string",
+                    "enum": [
+                        "HIGH",
+                        "MEDIUM",
+                        "LOW"
+                    ]
+                },
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "PENDING",
+                        "COMPLETED",
+                        "INPROGRESS",
+                        "MISSED"
+                    ]
+                }
+            },
+            "example": {
+                "status": "COMPLETED"
+            }
+        }
+    }
+}
